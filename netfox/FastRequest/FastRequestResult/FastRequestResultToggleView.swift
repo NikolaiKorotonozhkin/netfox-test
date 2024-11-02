@@ -48,7 +48,7 @@ struct SymbolToggleStyle: ToggleStyle {
             Spacer()
             
             RoundedRectangle(cornerRadius: 30)
-                .fill(configuration.isOn ? activeColor : Color(.systemGray5))
+                .fill(configuration.isOn ? activeColor : Color(uiColor: #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)))
                 .overlay {
                     Circle()
                         .fill(.white)
