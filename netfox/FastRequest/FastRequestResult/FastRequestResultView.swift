@@ -25,7 +25,7 @@ public struct FastRequestResultView: View {
     }
     
     public var body: some View {
-        if NFX.sharedInstance().isShow {
+        if !NFX.sharedInstance().isShow {
             myView()
                 .background(.white)
                 .navigationBarHidden(true)
@@ -44,12 +44,11 @@ public struct FastRequestResultView: View {
                 .sheet(isPresented: $showingSheet) {
                     SuperRequestView(currentTariff: currentTariff, completion: completion)
                 }
-                .ignoresSafeArea(.all)
         }
     }
     
     @MainActor
-    func myView() -> some View{
+    private func myView() -> some View {
         VStack() {
             Text(isProtect ? String(format: model?.scn?.title_compl ?? "", localizeText(forKey: .subsOn)) : String(format: model?.scn?.title_compl ?? "", localizeText(forKey: .subsDis)))
                 .font(.system(size: Constants.smallScreen ? 26 : 33, weight: .bold, design: .default))
