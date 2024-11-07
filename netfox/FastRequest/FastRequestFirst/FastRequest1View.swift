@@ -111,6 +111,7 @@ public struct FastRequest1View: View {
                                 id: \.title) { item in
                             InfoCellView(title: item.title, iconName: item.imageName ?? .screen1Icon2)
                                 .padding(.horizontal, 1)
+                                .padding(.top, 1)
                         }
                     }
                     .scrollIndicators(.hidden)
