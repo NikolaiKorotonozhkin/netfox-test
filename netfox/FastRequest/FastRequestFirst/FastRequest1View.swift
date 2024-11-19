@@ -35,17 +35,19 @@ public struct FastRequest1View: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var showNextScreen: Bool
+    @Binding var isDisabled: Bool
     
     private let redMockArray: [MockInfoItem]
     private let model: DataOfferObjectLib?
     private let currentTariff: String
     private let completion: (() -> Void)
     
-    public init(showNextScreen: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
+    public init(showNextScreen: Binding<Bool>, isDisabled: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
         self.model = model
         self.currentTariff = currentTariff
         self.completion = completion
         self._showNextScreen = showNextScreen
+        self._isDisabled = isDisabled
         
         self.redMockArray = [
             .init(title: model?.benefitDescriptions[0] ?? "", imageName: .screen1Icon),
@@ -138,6 +140,7 @@ public struct FastRequest1View: View {
                         }
                         .padding(.bottom)
                     }
+                    .disabled(isDisabled)
                 }
                 .padding(.horizontal)
                 .padding(.top, 50)
