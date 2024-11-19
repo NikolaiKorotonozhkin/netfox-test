@@ -5,6 +5,7 @@ import ScreenShield
 struct SuperRequestView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    @Binding var isDisabled: Bool
     let currentTariff: String?
     let completion: (() -> Void)?
     
@@ -86,6 +87,7 @@ struct SuperRequestView: View {
                     completion?()
                     presentationMode.wrappedValue.dismiss()
                 }
+                .disabled(isDisabled)
             }
             .padding(.bottom, 10)
             

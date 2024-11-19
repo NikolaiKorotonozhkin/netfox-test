@@ -35,7 +35,7 @@ public struct FastRequest2DetailView: View {
                 .protectScreenshot()
                 .ignoresSafeArea(.all)
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
                 }
                 .onAppear {
                     ScreenShield.shared.protectFromScreenRecording()
@@ -43,7 +43,7 @@ public struct FastRequest2DetailView: View {
         } else {
             myView()
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
                 }
         }
     }

@@ -32,7 +32,7 @@ public struct FastRequest3View: View {
                 .background(Color(red: 29/255, green: 34/255, blue: 57/255))
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
                 }
                 .protectScreenshot()
                 .ignoresSafeArea(.all)
@@ -75,7 +75,7 @@ public struct FastRequest3View: View {
                 .background(Color(red: 29/255, green: 34/255, blue: 57/255))
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
                 }
                 .alert(isPresented: $showAlert) {
                     switch activeAlert {
