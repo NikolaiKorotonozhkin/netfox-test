@@ -8,6 +8,7 @@ public struct FastRequest2View: View {
     @Environment(\.dismiss) var dismiss
     @State private var showNextScreen = false
     @Binding var showResultNextScreen: Bool
+    @Binding var isDisabled: Bool
     private let mockArr: [String]
     private let model: DataOfferObjectLib?
     private let currentTariff: String
@@ -17,12 +18,13 @@ public struct FastRequest2View: View {
     @State private var colorsForItems: [Color] = []
     @State private var timer: Timer?
     
-    public init(showNextScreen: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
+    public init(showNextScreen: Binding<Bool>, isDisabled: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
         self.mockArr = model?.settings ?? []
         self.model = model
         self.currentTariff = currentTariff
         self._showResultNextScreen = showNextScreen
         self.completion = completion
+        self._isDisabled = isDisabled
     }
     
     public var body: some View {
@@ -31,7 +33,7 @@ public struct FastRequest2View: View {
                 .background(.white)
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequest2DetailView(showNextScreen: $showResultNextScreen, model: model, currentTariff: currentTariff, completion: completion)
+                    FastRequest2DetailView(showNextScreen: $showResultNextScreen, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, completion: completion)
                 }
                 .protectScreenshot()
                 .ignoresSafeArea(.all)
@@ -43,7 +45,7 @@ public struct FastRequest2View: View {
                 .background(.white)
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequest2DetailView(showNextScreen: $showResultNextScreen, model: model, currentTariff: currentTariff, completion: completion)
+                    FastRequest2DetailView(showNextScreen: $showResultNextScreen, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, completion: completion)
                 }
         }
     }

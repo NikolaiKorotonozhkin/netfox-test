@@ -12,16 +12,18 @@ public struct FastRequest3View: View {
     @State private var showAlert = true
     @State private var activeAlert: ActiveAlert = .first
     @Binding var showNextScreen: Bool
+    @Binding var isDisabled: Bool
     
     private let model: DataOfferObjectLib?
     private let currentTariff: String
     private let completion: (() -> Void)
     
-    public init(showNextScreen: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
+    public init(showNextScreen: Binding<Bool>, isDisabled: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
         self.model = model
         self.currentTariff = currentTariff
         self._showNextScreen = showNextScreen
         self.completion = completion
+        self._isDisabled = isDisabled
     }
     
     public var body: some View {
@@ -158,6 +160,7 @@ public struct FastRequest3View: View {
                     .background(Color(red: 115/255, green: 199/255, blue: 0/255))
                     .cornerRadius(10)
             }
+            .disabled(isDisabled)
             .padding(.horizontal, 37)
             .padding(.bottom, 30)
         }

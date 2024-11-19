@@ -7,6 +7,7 @@ import Kingfisher
 struct CustomCenterAlertView: View {
     let model: DataOfferObjectLib?
     @Binding var showAlert: Bool
+    @Binding var isDisabled: Bool
     var buttonTapped: () -> Void
     
     var body: some View {
@@ -38,6 +39,7 @@ struct CustomCenterAlertView: View {
                     .padding(.vertical, 0)
             }
             .padding(.top, 11)
+            .disabled(isDisabled)
         }
         .padding()
         .frame(width: 270)

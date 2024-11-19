@@ -7,18 +7,20 @@ public struct FastRequest2DetailView: View {
     @State private var showAlert = false
     @State private var showNotification = false
     @Binding var showNextScreen: Bool
+    @Binding var isDisabled: Bool
     
     private let model: DataOfferObjectLib?
     private let mockArray: [MockInfoItem]
     private let currentTariff: String
     private let completion: (() -> Void)
     
-    public init(showNextScreen: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
+    public init(showNextScreen: Binding<Bool>, isDisabled: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
         self.model = model
         var fullArray: [MockInfoItem] = []
         self.currentTariff = currentTariff
         self._showNextScreen = showNextScreen
         self.completion = completion
+        self._isDisabled = isDisabled
         
         model?.prtd?.issues?.forEach({ issue in
             fullArray.append(.init(title: issue.name ?? "", subTitle: issue.status, imgUrl: issue.icon))
@@ -188,7 +190,7 @@ public struct FastRequest2DetailView: View {
             .edgesIgnoringSafeArea(.top)
 
             if showAlert {
-                CustomCenterAlertView(model: model, showAlert: $showAlert) {
+                CustomCenterAlertView(model: model, showAlert: $showAlert, isDisabled: $isDisabled) {
                     completion()
                 }
                     .transition(.scale)

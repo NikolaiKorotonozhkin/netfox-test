@@ -5,17 +5,19 @@ import ScreenShield
 
 public struct FastRequest4View: View {
     @Binding var showNextScreen: Bool
+    @Binding var isDisabled: Bool
     
     private let model: DataOfferObjectLib?
     private let currentTariff: String
     private let completion: (() -> Void)
     private let data: [(String, String)]
     
-    public init(showNextScreen: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
+    public init(showNextScreen: Binding<Bool>, isDisabled: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
         self.model = model
         self.currentTariff = currentTariff
         self._showNextScreen = showNextScreen
         self.completion = completion
+        self._isDisabled = isDisabled
         
         let dataSource = model?.objectTwo?.center.items.map({ ($0.name ?? "", $0.res ?? "") }) ?? []
         
@@ -85,7 +87,7 @@ public struct FastRequest4View: View {
                 .background(Color(UIColor(red: 243/255, green: 243/255, blue: 247/255, alpha: 1)))
                 .scrollContentBackground(.hidden)
                 
-                BottomCustomView(model: model) {
+                BottomCustomView(isDisabled: $isDisabled, model: model) {
                     completion()
                 }
                 .padding(.horizontal, 20)
@@ -103,6 +105,7 @@ public struct FastRequest4View: View {
 }
 
 struct BottomCustomView: View {
+    @Binding var isDisabled: Bool
     let model: DataOfferObjectLib?
     var buttonTapped: () -> Void
     
@@ -146,6 +149,7 @@ struct BottomCustomView: View {
                     .foregroundColor(.white)
                     .cornerRadius(19)
             }
+            .disabled(isDisabled)
             
             Text(model?.objectTwo?.description.btn_subtitle ?? "")
                 .multilineTextAlignment(.leading)
