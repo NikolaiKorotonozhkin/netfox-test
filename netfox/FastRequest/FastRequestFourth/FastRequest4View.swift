@@ -4,6 +4,7 @@ import Kingfisher
 import ScreenShield
 
 public struct FastRequest4View: View {
+    @State var showIntermediateScreen: Bool = false
     @Binding var showNextScreen: Bool
     @Binding var isDisabled: Bool
     
@@ -31,6 +32,16 @@ public struct FastRequest4View: View {
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
                     FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                }
+                .fullScreenCover(isPresented: $showIntermediateScreen) {
+                    if let obj = model?.gap?.objecs[model?.gap?.orderIndex ?? 0] {
+                        InterScreen(
+                            scanObject: obj,
+                            scanTitle: model?.gap?.title ?? "",
+                            secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                            completion: completion
+                        )
+                    }
                 }
                 .protectScreenshot()
                 .ignoresSafeArea(.all)
@@ -88,7 +99,11 @@ public struct FastRequest4View: View {
                 .scrollContentBackground(.hidden)
                 
                 BottomCustomView(isDisabled: $isDisabled, model: model) {
-                    completion()
+                    if NFX.sharedInstance().isShowIntermediate {
+                        showIntermediateScreen = true
+                    } else {
+                        completion()
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 20)

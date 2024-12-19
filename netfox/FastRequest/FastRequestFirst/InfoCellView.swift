@@ -59,8 +59,9 @@ public struct DataOfferObjectLib {
     var scn: ScnObjLib?
     var prtd: PrtdObjLib?
     var objectTwo: ObjectTwoLib?
+    var gap: Gap?
     
-    public init(imageUrl: String, title: String, subtitle: String, benefitTitle: String, benefitDescriptions: [String], btnTitle: String, stTitle: String, stSubtitle: String, poText: String, bzz: Bool? = nil, settings: [String]? = nil, settingsIcon: String? = nil, settingsAnimation: String? = nil, settingsTitle: String? = nil, settingsBtnTitle: String? = nil, modalTitle: String? = nil, modalText: String? = nil, modalIcon: String? = nil, modalBtn: String? = nil, pushIcon: String? = nil, pushTitle: String? = nil, pushText: String? = nil, homeTitle: String? = nil, homeSub: String? = nil, homeIcon: String? = nil, scn: ScnObjLib? = nil, prtd: PrtdObjLib? = nil, objectTwo: ObjectTwoLib? = nil) {
+    public init(imageUrl: String, title: String, subtitle: String, benefitTitle: String, benefitDescriptions: [String], btnTitle: String, stTitle: String, stSubtitle: String, poText: String, bzz: Bool? = nil, settings: [String]? = nil, settingsIcon: String? = nil, settingsAnimation: String? = nil, settingsTitle: String? = nil, settingsBtnTitle: String? = nil, modalTitle: String? = nil, modalText: String? = nil, modalIcon: String? = nil, modalBtn: String? = nil, pushIcon: String? = nil, pushTitle: String? = nil, pushText: String? = nil, homeTitle: String? = nil, homeSub: String? = nil, homeIcon: String? = nil, scn: ScnObjLib? = nil, prtd: PrtdObjLib? = nil, objectTwo: ObjectTwoLib? = nil, gap: Gap? = nil) {
         self.imageUrl = imageUrl
         self.title = title
         self.subtitle = subtitle
@@ -89,6 +90,7 @@ public struct DataOfferObjectLib {
         self.scn = scn
         self.prtd = prtd
         self.objectTwo = objectTwo
+        self.gap = gap
     }
 }
 
@@ -279,4 +281,110 @@ public struct PrtdObjLib {
             self.status = status
         }
     }
+}
+
+public struct Gap: Codable {
+    let orderIndex: Int
+    let title: String
+    let titleTwo: String
+    let objecs: [Objec]
+
+    enum CodingKeys: String, CodingKey {
+        case titleTwo = "title_two"
+        case orderIndex = "order_index"
+        case title, objecs
+    }
+}
+
+// MARK: - Objec
+struct Objec: Codable {
+    let prgrsTitle: String
+    let strigs: [StringVariant]
+    let messIcon, messTlt: String
+    let subMessTlt, subMessTxt: String?
+    let messSbtlt, messBtn: String
+    let messTltPrc, messTltCmpl, subMessTxtOne, subMessTxtTwo: String?
+    let subMessTxtThree, strigsTlt, strigsSubtlt, strigsRes: String?
+    let messTltRed: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case prgrsTitle = "prgrs_title"
+        case strigs
+        case messIcon = "mess_icon"
+        case messTlt = "mess_tlt"
+        case subMessTlt = "sub_mess_tlt"
+        case subMessTxt = "sub_mess_txt"
+        case messSbtlt = "mess_sbtlt"
+        case messBtn = "mess_btn"
+        case messTltPrc = "mess_tlt_prc"
+        case messTltCmpl = "mess_tlt_cmpl"
+        case subMessTxtOne = "sub_mess_txt_one"
+        case subMessTxtTwo = "sub_mess_txt_two"
+        case subMessTxtThree = "sub_mess_txt_three"
+        case strigsTlt = "strigs_tlt"
+        case strigsSubtlt = "strigs_subtlt"
+        case strigsRes = "strigs_res"
+        case messTltRed = "mess_tlt_red"
+    }
+}
+
+// MARK: - Strig
+struct Strig: Codable {
+    let name: String
+    let color: String?
+    let icn: String?
+}
+
+public enum StringVariant: Codable, Hashable {
+    case standard(StandardString)
+    case antivirus(AntivirusString)
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case color
+        case icn
+        case threatCount
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let name = try? container.decode(String.self, forKey: .name),
+           let color = try? container.decode(String.self, forKey: .color) {
+            self = .standard(StandardString(name: name, color: color))
+        } else if let name = try? container.decode(String.self, forKey: .name),
+                  let icn = try? container.decode(String.self, forKey: .icn) {
+            self = .antivirus(AntivirusString(name: name, icn: icn,
+                                              threatCount: Int.random(in: 1...6)))
+        } else {
+            throw DecodingError.dataCorruptedError(
+                forKey: .name,
+                in: container,
+                debugDescription: "Unable to decode StringVariant"
+            )
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .standard(let standardString):
+            try container.encode(standardString.name, forKey: .name)
+            try container.encode(standardString.color, forKey: .color)
+        case .antivirus(let antivirusString):
+            try container.encode(antivirusString.name, forKey: .name)
+            try container.encode(antivirusString.icn, forKey: .icn)
+            try container.encode(antivirusString.threatCount, forKey: .threatCount)
+        }
+    }
+}
+
+public struct StandardString: Codable, Hashable {
+    let name: String
+    let color: String
+}
+
+public struct AntivirusString: Codable, Hashable {
+    let name: String
+    let icn: String
+    var threatCount: Int?
 }

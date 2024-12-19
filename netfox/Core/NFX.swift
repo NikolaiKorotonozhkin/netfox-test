@@ -42,6 +42,7 @@ open class NFX: NSObject {
         case nibName = "NetfoxWindow"
     }
     public var isShow: Bool = true
+    public var isShowIntermediate: Bool = true
     fileprivate var started: Bool = false
     fileprivate var presented: Bool = false
     fileprivate var enabled: Bool = false

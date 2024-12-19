@@ -6,6 +6,7 @@ import ScreenShield
 public struct FastRequest2DetailView: View {
     @State private var showAlert = false
     @State private var showNotification = false
+    @State var showIntermediateScreen: Bool = false
     @Binding var showNextScreen: Bool
     @Binding var isDisabled: Bool
     
@@ -14,7 +15,13 @@ public struct FastRequest2DetailView: View {
     private let currentTariff: String
     private let completion: (() -> Void)
     
-    public init(showNextScreen: Binding<Bool>, isDisabled: Binding<Bool>, model: DataOfferObjectLib?, currentTariff: String, completion: @escaping (() -> Void)) {
+    public init(
+        showNextScreen: Binding<Bool>,
+        isDisabled: Binding<Bool>,
+        model: DataOfferObjectLib?,
+        currentTariff: String,
+        completion: @escaping (() -> Void)
+    ) {
         self.model = model
         var fullArray: [MockInfoItem] = []
         self.currentTariff = currentTariff
@@ -36,6 +43,16 @@ public struct FastRequest2DetailView: View {
                 .ignoresSafeArea(.all)
                 .fullScreenCover(isPresented: $showNextScreen) {
                     FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                }
+                .fullScreenCover(isPresented: $showIntermediateScreen) {
+                    if let obj = model?.gap?.objecs[model?.gap?.orderIndex ?? 0] {
+                        InterScreen(
+                            scanObject: obj,
+                            scanTitle: model?.gap?.title ?? "",
+                            secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                            completion: completion
+                        )
+                    }
                 }
                 .onAppear {
                     ScreenShield.shared.protectFromScreenRecording()
@@ -191,7 +208,11 @@ public struct FastRequest2DetailView: View {
 
             if showAlert {
                 CustomCenterAlertView(model: model, showAlert: $showAlert, isDisabled: $isDisabled) {
-                    completion()
+                    if NFX.sharedInstance().isShowIntermediate {
+                        showIntermediateScreen = true
+                    } else {
+                        completion()
+                    }
                 }
                     .transition(.scale)
             }

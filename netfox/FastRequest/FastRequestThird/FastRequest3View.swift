@@ -11,6 +11,7 @@ enum ActiveAlert {
 public struct FastRequest3View: View {
     @State private var showAlert = true
     @State private var activeAlert: ActiveAlert = .first
+    @State var showIntermediateScreen: Bool = false
     @Binding var showNextScreen: Bool
     @Binding var isDisabled: Bool
     
@@ -33,6 +34,16 @@ public struct FastRequest3View: View {
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
                     FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                }
+                .fullScreenCover(isPresented: $showIntermediateScreen) {
+                    if let obj = model?.gap?.objecs[model?.gap?.orderIndex ?? 0] {
+                        InterScreen(
+                            scanObject: obj,
+                            scanTitle: model?.gap?.title ?? "",
+                            secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                            completion: completion
+                        )
+                    }
                 }
                 .protectScreenshot()
                 .ignoresSafeArea(.all)
@@ -65,7 +76,11 @@ public struct FastRequest3View: View {
                             message: Text(alertMess),
                             primaryButton: .cancel(Text("Cancel")),
                             secondaryButton: .default(Text("OK"), action: {
-                                completion()
+                                if NFX.sharedInstance().isShowIntermediate {
+                                    showIntermediateScreen = true
+                                } else {
+                                    completion()
+                                }
                             })
                         )
                     }
