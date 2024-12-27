@@ -12,6 +12,7 @@ struct ProgressBar: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
+                
                 ZStack(alignment: .leading) {
                     Capsule()
                         .foregroundColor(backgroundColor)

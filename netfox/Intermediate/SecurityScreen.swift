@@ -4,7 +4,7 @@ import Kingfisher
 
 struct InterScreen : View {
     
-    var scanObject: Objec
+    var scanObject: ObjecLib
     var scanTitle: String
     var secureScreenNumber: Int
     let completion: (() -> Void)

@@ -288,7 +288,7 @@ public struct Gap: Codable {
     let title: String
     let titleTwo: String
     let objecs: [Objec]
-
+    
     enum CodingKeys: String, CodingKey {
         case titleTwo = "title_two"
         case orderIndex = "order_index"
@@ -306,7 +306,7 @@ struct Objec: Codable {
     let messTltPrc, messTltCmpl, subMessTxtOne, subMessTxtTwo: String?
     let subMessTxtThree, strigsTlt, strigsSubtlt, strigsRes: String?
     let messTltRed: [String]?
-
+    
     enum CodingKeys: String, CodingKey {
         case prgrsTitle = "prgrs_title"
         case strigs
@@ -338,14 +338,14 @@ struct Strig: Codable {
 public enum StringVariant: Codable, Hashable {
     case standard(StandardString)
     case antivirus(AntivirusString)
-
+    
     enum CodingKeys: String, CodingKey {
         case name
         case color
         case icn
         case threatCount
     }
-
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let name = try? container.decode(String.self, forKey: .name),
@@ -363,7 +363,7 @@ public enum StringVariant: Codable, Hashable {
             )
         }
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
@@ -394,7 +394,7 @@ public struct GapLib {
     let title: String
     let titleTwo: String
     let objecs: [ObjecLib]
-
+    
     public init(orderIndex: Int, title: String, titleTwo: String, objecs: [ObjecLib]) {
         self.orderIndex = orderIndex
         self.title = title
