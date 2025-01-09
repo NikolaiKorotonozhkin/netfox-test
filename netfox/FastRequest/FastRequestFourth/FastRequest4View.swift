@@ -34,7 +34,7 @@ public struct FastRequest4View: View {
                     FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
                 }
                 .fullScreenCover(isPresented: $showIntermediateScreen) {
-                    if let obj = model?.gap?.objecs?[model?.gap?.orderIndex ?? 0] {
+                    if let obj = model?.gap?.objecs?[(model?.gap?.orderIndex ?? 1) - 1] {
                         InterScreen(
                             scanObject: obj,
                             scanTitle: model?.gap?.title ?? "",
