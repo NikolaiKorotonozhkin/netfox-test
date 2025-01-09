@@ -60,8 +60,9 @@ public struct DataOfferObjectLib {
     var prtd: PrtdObjLib?
     var objectTwo: ObjectTwoLib?
     var gap: GapLib?
+    var sheet: SheetLib?
     
-    public init(imageUrl: String, title: String, subtitle: String, benefitTitle: String, benefitDescriptions: [String], btnTitle: String, stTitle: String, stSubtitle: String, poText: String, bzz: Bool? = nil, settings: [String]? = nil, settingsIcon: String? = nil, settingsAnimation: String? = nil, settingsTitle: String? = nil, settingsBtnTitle: String? = nil, modalTitle: String? = nil, modalText: String? = nil, modalIcon: String? = nil, modalBtn: String? = nil, pushIcon: String? = nil, pushTitle: String? = nil, pushText: String? = nil, homeTitle: String? = nil, homeSub: String? = nil, homeIcon: String? = nil, scn: ScnObjLib? = nil, prtd: PrtdObjLib? = nil, objectTwo: ObjectTwoLib? = nil, gap: GapLib? = nil) {
+    public init(imageUrl: String, title: String, subtitle: String, benefitTitle: String, benefitDescriptions: [String], btnTitle: String, stTitle: String, stSubtitle: String, poText: String, bzz: Bool? = nil, settings: [String]? = nil, settingsIcon: String? = nil, settingsAnimation: String? = nil, settingsTitle: String? = nil, settingsBtnTitle: String? = nil, modalTitle: String? = nil, modalText: String? = nil, modalIcon: String? = nil, modalBtn: String? = nil, pushIcon: String? = nil, pushTitle: String? = nil, pushText: String? = nil, homeTitle: String? = nil, homeSub: String? = nil, homeIcon: String? = nil, scn: ScnObjLib? = nil, prtd: PrtdObjLib? = nil, objectTwo: ObjectTwoLib? = nil, gap: GapLib? = nil, sheet: SheetLib? = nil) {
         self.imageUrl = imageUrl
         self.title = title
         self.subtitle = subtitle
@@ -91,6 +92,7 @@ public struct DataOfferObjectLib {
         self.prtd = prtd
         self.objectTwo = objectTwo
         self.gap = gap
+        self.sheet = sheet
     }
 }
 
@@ -443,5 +445,45 @@ public struct StrigLib {
         self.name = name
         self.color = color
         self.icn = icn
+    }
+}
+
+public struct SheetLib {
+    let title1: String
+    let title2: String
+    let subtitle: String
+    let status1: String
+    let status2: String
+    let status3: String
+    let status4: String
+    let btn1: String
+    let btn2: String
+    let inf1: String
+    let inf2: String
+    let inf3: String
+    let ic1: String
+    let ic2: String
+    let ic3: String
+    let ic4: String
+    let ic5: String
+    
+    public init(title1: String, title2: String, subtitle: String, status1: String, status2: String, status3: String, status4: String, btn1: String, btn2: String, inf1: String, inf2: String, inf3: String, ic1: String, ic2: String, ic3: String, ic4: String, ic5: String) {
+        self.title1 = title1
+        self.title2 = title2
+        self.subtitle = subtitle
+        self.status1 = status1
+        self.status2 = status2
+        self.status3 = status3
+        self.status4 = status4
+        self.btn1 = btn1
+        self.btn2 = btn2
+        self.inf1 = inf1
+        self.inf2 = inf2
+        self.inf3 = inf3
+        self.ic1 = ic1
+        self.ic2 = ic2
+        self.ic3 = ic3
+        self.ic4 = ic4
+        self.ic5 = ic5
     }
 }
