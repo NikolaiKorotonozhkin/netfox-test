@@ -397,7 +397,7 @@ public struct GapLib {
     let titleTwo: String
     let objecs: [ObjecLib]?
     
-    public init(orderIndex: Int, title: String, titleTwo: String, objecs: [ObjecLib]) {
+    public init(orderIndex: Int, title: String, titleTwo: String, objecs: [ObjecLib]?) {
         self.orderIndex = orderIndex
         self.title = title
         self.titleTwo = titleTwo
@@ -415,7 +415,7 @@ public struct ObjecLib {
     let subMessTxtThree, strigsTlt, strigsSubtlt, strigsRes: String?
     let messTltRed: [String]?
     
-    public init(prgrsTitle: String, strigs: [StrigLib], messIcon: String, messTlt: String, subMessTlt: String?, subMessTxt: String?, messSbtlt: String, messBtn: String, messTltPrc: String?, messTltCmpl: String?, subMessTxtOne: String?, subMessTxtTwo: String?, subMessTxtThree: String?, strigsTlt: String?, strigsSubtlt: String?, strigsRes: String?, messTltRed: [String]?) {
+    public init(prgrsTitle: String, strigs: [StrigLib]?, messIcon: String, messTlt: String, subMessTlt: String?, subMessTxt: String?, messSbtlt: String, messBtn: String, messTltPrc: String?, messTltCmpl: String?, subMessTxtOne: String?, subMessTxtTwo: String?, subMessTxtThree: String?, strigsTlt: String?, strigsSubtlt: String?, strigsRes: String?, messTltRed: [String]?) {
         self.prgrsTitle = prgrsTitle
         self.strigs = strigs
         self.messIcon = messIcon
