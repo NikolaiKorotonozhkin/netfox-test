@@ -159,7 +159,7 @@ public struct FastRequest1View: View {
 //                FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
 //            }
 //            .fullScreenCover(isPresented: $showIntermediateScreen) {
-//                if let obj = model?.gap?.objecs[model?.gap?.orderIndex] {
+//                if let obj = model?.gap?.objecs?[model?.gap?.orderIndex] {
 //                    InterScreen(
 //                        scanObject: obj,
 //                        scanTitle: model?.gap?.title ?? "",

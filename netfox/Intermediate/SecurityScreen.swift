@@ -52,6 +52,7 @@ struct InterScreen : View {
         let totalStrings = scanObject.strigs.count
         var cumulativeDelay: TimeInterval = 0
         
+        
         for (index, string) in scanObject.strigs.enumerated() {
             
             guard !showAlert else { break }
