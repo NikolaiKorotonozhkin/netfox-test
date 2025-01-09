@@ -395,7 +395,7 @@ public struct GapLib {
     let orderIndex: Int
     let title: String
     let titleTwo: String
-    let objecs: [ObjecLib]
+    let objecs: [ObjecLib]?
     
     public init(orderIndex: Int, title: String, titleTwo: String, objecs: [ObjecLib]) {
         self.orderIndex = orderIndex
@@ -407,7 +407,7 @@ public struct GapLib {
 
 public struct ObjecLib {
     let prgrsTitle: String
-    let strigs: [StrigLib]
+    let strigs: [StrigLib]?
     let messIcon, messTlt: String
     let subMessTlt, subMessTxt: String?
     let messSbtlt, messBtn: String
