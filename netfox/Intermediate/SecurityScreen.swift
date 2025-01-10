@@ -205,7 +205,7 @@ private extension InterScreen {
             VStack(spacing: 14) {
                 ProgressBar(
                     progress: progress,
-                    foregroundColor: Color(red: 223/255, green: 223/255, blue: 223/255),
+                    foregroundColor: Color(red: 0/255, green: 122/255, blue: 255/255),
                     maxValue: scanObject.strigs.count
                 ) { currentProgress in
                     print("\(currentProgress)")
