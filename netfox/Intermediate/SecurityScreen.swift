@@ -150,7 +150,7 @@ private extension InterScreen {
     ) -> some View {
         ZStack {
             
-            Color("progressBackground").ignoresSafeArea()
+            Color(red: 242/255, green: 242/255, blue: 242/255).ignoresSafeArea()
             
             VStack(
                 spacing: AdaptivePadding.getPadding(
@@ -183,7 +183,7 @@ private extension InterScreen {
             .padding(.vertical, isLandscape ? 10 : 24)
             
             if showAlert {
-                Color("alertWindowBackground")
+                Color(red: 179/255, green: 179/255, blue: 179/255, opacity: 0.82)
                     .edgesIgnoringSafeArea(.all)
                 switch secureScreenNumber {
                 case 0:
@@ -205,7 +205,7 @@ private extension InterScreen {
             VStack(spacing: 14) {
                 ProgressBar(
                     progress: progress,
-                    foregroundColor: Color("alertBackground"),
+                    foregroundColor: Color(red: 223/255, green: 223/255, blue: 223/255),
                     maxValue: scanObject.strigs.count
                 ) { currentProgress in
                     print("\(currentProgress)")
@@ -264,7 +264,7 @@ private extension InterScreen {
                                     isIpad: isIpad
                                 )
                             )
-                            .foregroundColor(Color("scanningStatus"))
+                            .foregroundColor(Color(red: 124/255, green: 124/255, blue: 124/255))
 
                         if let scanString = displayedStrings[key] {
                             Text(scanString.name)
@@ -319,7 +319,7 @@ private extension InterScreen {
                                         isIpad: isIpad
                                     )
                                 )
-                                .foregroundColor(Color("scanningStatus"))
+                                .foregroundColor(Color(red: 124/255, green: 124/255, blue: 124/255))
                             
                             if isFinalDisplay {
                                 if let threats = string.threatCount {
@@ -345,7 +345,7 @@ private extension InterScreen {
                                             isIpad: isIpad
                                         )
                                     )
-                                    .foregroundColor(Color("scanningStatus"))
+                                    .foregroundColor(Color(red: 124/255, green: 124/255, blue: 124/255))
                             } else {
                                 if let threats = string.threatCount {
                                     let count = scanObject.strigsRes?.replacingOccurrences(of: "%", with: "\(threats)") ?? ""
@@ -400,7 +400,7 @@ private extension InterScreen {
                 
                 Text(scanObject.subMessTxt ?? "")
                 .font(.system(size: isIpad ? 16: 13))
-                .foregroundColor(Color("threatMessage"))
+                .foregroundColor(Color(red: 110/255, green: 112/255, blue: 101/255))
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
             }
@@ -409,7 +409,7 @@ private extension InterScreen {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color("alertThreatBackground"))
+                    .fill(Color.black.opacity(0.06))
             )
             .padding(.horizontal, 16)
             
@@ -422,7 +422,7 @@ private extension InterScreen {
             .padding(.horizontal, 16)
             
             VStack {
-                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color("alertSeparator"))
+                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color(red: 60/255, green: 60/255, blue: 67/255, opacity: 0.36))
                 
                 Button {
                     completion()
@@ -440,7 +440,7 @@ private extension InterScreen {
         .padding(.top, 19)
         .background(
             RoundedRectangle(cornerRadius: 14)
-                .fill(Color("alertBackground"))
+                .fill(Color(red: 223/255, green: 223/255, blue: 223/255))
                 .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 4)
         )
         .frame(width: isIpad ? 400 : 270)
@@ -476,7 +476,7 @@ private extension InterScreen {
                 
                 Text("\(scanObject.subMessTxtOne ?? "") \(scanObject.subMessTxtTwo ?? "") \(scanObject.subMessTxtThree ?? "")")
                     .font(.system(size: isIpad ? 16: 13))
-                    .foregroundColor(Color("threatMessage"))
+                    .foregroundColor(Color(red: 110/255, green: 112/255, blue: 101/255))
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
             }
@@ -485,7 +485,7 @@ private extension InterScreen {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color("alertThreatBackground"))
+                    .fill(Color.black.opacity(0.06))
             )
             .padding(.horizontal, 16)
             
@@ -498,7 +498,7 @@ private extension InterScreen {
                 .padding(.horizontal, 16)
             
             VStack {
-                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color("alertSeparator"))
+                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color(red: 60/255, green: 60/255, blue: 67/255, opacity: 0.36))
                 
                 Button {
                     completion()
@@ -516,7 +516,7 @@ private extension InterScreen {
         .padding(.top, 19)
         .background(
             RoundedRectangle(cornerRadius: 14)
-                .fill(Color("alertBackground"))
+                .fill(Color(red: 223/255, green: 223/255, blue: 223/255))
                 .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 4)
         )
         .frame(width: isIpad ? 400 : 270)
@@ -553,7 +553,7 @@ private extension InterScreen {
                 .padding(.horizontal, 16)
             
             VStack {
-                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color("alertSeparator"))
+                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color(red: 60/255, green: 60/255, blue: 67/255, opacity: 0.36))
                 
                 Button {
                     completion()
@@ -571,7 +571,7 @@ private extension InterScreen {
         .padding(.top, 19)
         .background {
             RoundedRectangle(cornerRadius: 14)
-                .fill(Color("alertBackground"))
+                .fill(Color(red: 223/255, green: 223/255, blue: 223/255))
                 .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 4)
             }
         .frame(width: isIpad ? 400 : 270)
@@ -608,7 +608,7 @@ private extension InterScreen {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color("alertThreatBackground"))
+                    .fill(Color.black.opacity(0.06))
             )
             .padding(.horizontal, 16)
             
@@ -620,7 +620,7 @@ private extension InterScreen {
                 .padding(.horizontal, 16)
             
             VStack {
-                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color("alertSeparator"))
+                Spacer().frame(maxWidth: .infinity, maxHeight: 1).background(Color(red: 60/255, green: 60/255, blue: 67/255, opacity: 0.36))
                 
                 Button {
                     completion()
@@ -638,7 +638,7 @@ private extension InterScreen {
         .padding(.top, 19)
         .background(
             RoundedRectangle(cornerRadius: 14)
-                .fill(Color("alertBackground"))
+                .fill(Color(red: 223/255, green: 223/255, blue: 223/255))
                 .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 4)
         )
         .frame(width: isIpad ? 400 : 270)
@@ -658,18 +658,18 @@ private extension InterScreen {
                     messageTitleRed: redWords
                 )
                 .font(.system(size: isIpad ? 16: 13))
-                .foregroundColor(Color("threatMessage"))
+                .foregroundColor(Color(red: 110/255, green: 112/255, blue: 101/255))
                 .multilineTextAlignment(.center)
             } else {
                 Text(completion)
                     .font(.system(size: isIpad ? 16: 13))
-                    .foregroundColor(Color("threatMessage"))
+                    .foregroundColor(Color(red: 110/255, green: 112/255, blue: 101/255))
                     .multilineTextAlignment(.center)
             }
         } else {
             Text("")
                 .font(.system(size: isIpad ? 16: 13))
-                .foregroundColor(Color("threatMessage"))
+                .foregroundColor(Color(red: 110/255, green: 112/255, blue: 101/255))
                 .multilineTextAlignment(.center)
         }
     }
