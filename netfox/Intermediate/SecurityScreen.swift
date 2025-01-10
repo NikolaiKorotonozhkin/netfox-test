@@ -58,6 +58,11 @@ struct InterScreen : View {
                             threatCount: 3)
         })
         
+        let strStandart: [StandardString] = scanObject.strigs.map({
+            StandardString(name: $0.name,
+                           color: $0.color ?? "")
+        })
+        
         for (index, string) in scanObject.strigs.enumerated() {
             
             guard !showAlert else { break }
@@ -86,6 +91,21 @@ struct InterScreen : View {
                 print("screen 2")
             case 3:
                 print("screen 3")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+                    guard !showAlert else { return }
+                    
+                    withAnimation {
+                        displayedStrings[Date()] = strStandart[index]
+                        progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
+                        if secureScreenNumber == 1, strStandart[index].color == "red" {
+                            redStringCount += 1
+                            if redStringCount == 3 {
+                                showAlert = true
+                            }
+                        }
+                    }
+                }
             default:
                 print("screen 4")
                 
