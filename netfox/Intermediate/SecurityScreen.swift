@@ -174,7 +174,7 @@ private extension InterScreen {
                 
                 progress(isIpad: isIpad)
                 
-                if secureScreenNumber != 3{
+                if secureScreenNumber != 4{
                     data(isIpad: isIpad)
                 } else {
                     antivirusData(isIpad: isIpad)
