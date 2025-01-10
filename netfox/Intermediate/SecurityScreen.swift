@@ -52,6 +52,11 @@ struct InterScreen : View {
         let totalStrings = scanObject.strigs.count
         var cumulativeDelay: TimeInterval = 0
         
+        let strTest: [AntivirusString] = scanObject.strigs.map({
+            AntivirusString(name: $0.name,
+                            icn: $0.icn ?? "",
+                            threatCount: 3)
+        })
         
         for (index, string) in scanObject.strigs.enumerated() {
             
@@ -60,15 +65,40 @@ struct InterScreen : View {
             let randomDelay = TimeInterval(Double.random(in: 1.0...1.5))
             cumulativeDelay += randomDelay
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-                guard !showAlert else { return }
-                displayedAntivirusStrings.insert(AntivirusString(name: "test", icn: "t"), at: 0)
-                withAnimation {
-                    progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
-                    
-                    if index == totalStrings - 1 {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            isFinalDisplay = true
+//            DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+//                guard !showAlert else { return }
+//                displayedAntivirusStrings.insert(AntivirusString(name: "test", icn: "t"), at: 0)
+//                withAnimation {
+//                    progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
+//                    
+//                    if index == totalStrings - 1 {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                            isFinalDisplay = true
+//                        }
+//                    }
+//                }
+//            }
+            
+            switch secureScreenNumber {
+            case 1:
+                print("screen 1")
+            case 2:
+                print("screen 2")
+            case 3:
+                print("screen 3")
+            default:
+                print("screen 4")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+                    guard !showAlert else { return }
+                    displayedAntivirusStrings.insert(strTest[index], at: 0)
+                    withAnimation {
+                        progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
+                        
+                        if index == totalStrings - 1 {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                isFinalDisplay = true
+                            }
                         }
                     }
                 }
