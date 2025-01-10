@@ -312,7 +312,7 @@ private extension InterScreen {
                             .frame(width: 18, height: 20)
                         
                         VStack(alignment: .leading) {
-                            Text("[\(string.name)] \(Text("\(String(describing: index == 0 ? scanObject.strigsTlt : "Finished"))").foregroundColor(.black))")
+                            Text("[\(string.name)] \(Text("\(String(describing: index == 0 ? (scanObject.strigsTlt ?? "") : "Finished"))").foregroundColor(.black))")
                                 .font(
                                     TextUtil().adaptiveFont(
                                         textSize: .scanString,
