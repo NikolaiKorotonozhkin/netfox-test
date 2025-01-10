@@ -306,7 +306,7 @@ private extension InterScreen {
                     HStack(alignment: .top, spacing: 10) {
                         
                         KFImage(URL(string: string.icn))
-                            .setProcessor(SVGImgProcessor())
+//                            .setProcessor(SVGImgProcessor())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 20)
@@ -409,7 +409,7 @@ private extension InterScreen {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.black.opacity(0.06))
+                    .fill(Color.black.opacity(0.4))
             )
             .padding(.horizontal, 16)
             
