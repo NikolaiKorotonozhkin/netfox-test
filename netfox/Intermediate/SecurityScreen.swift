@@ -203,16 +203,24 @@ private extension InterScreen {
             .padding(.vertical, isLandscape ? 10 : 24)
             
             if showAlert {
-//                Color(red: 179/255, green: 179/255, blue: 179/255, opacity: 0.82)
-//                    .edgesIgnoringSafeArea(.all)
-                Color.black.opacity(0.3)
+                Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
+//                switch secureScreenNumber {
+//                case 0:
+//                    alert0(isIpad: isIpad)
+//                case 1:
+//                    alert1(isIpad: isIpad)
+//                case 2:
+//                    alert2(isIpad: isIpad)
+//                default:
+//                    alert3(isIpad: isIpad)
+//                }
                 switch secureScreenNumber {
-                case 0:
-                    alert0(isIpad: isIpad)
                 case 1:
-                    alert1(isIpad: isIpad)
+                    alert0(isIpad: isIpad)
                 case 2:
+                    alert1(isIpad: isIpad)
+                case 3:
                     alert2(isIpad: isIpad)
                 default:
                     alert3(isIpad: isIpad)
