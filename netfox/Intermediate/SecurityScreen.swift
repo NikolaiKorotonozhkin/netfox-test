@@ -240,19 +240,19 @@ private extension InterScreen {
 //                    }
                     switch secureScreenNumber {
                     case 1:
-                        if currentProgress == 95 {
+                        if currentProgress >= 95 {
                             showAlert = true
                         }
                     case 2:
-                        if currentProgress == 10 {
+                        if currentProgress >= 10 {
                             showAlert = false
                         }
                     case 3:
-                        if currentProgress == 100 {
+                        if currentProgress >= 100 {
                             showAlert = true
                         }
                     default:
-                        if currentProgress == 100 {
+                        if currentProgress >= 100 {
                             showAlert = true
                         }
                     }
@@ -438,7 +438,7 @@ private extension InterScreen {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.black.opacity(0.4))
+                    .fill(Color.black.opacity(0.06))
             )
             .padding(.horizontal, 16)
             
