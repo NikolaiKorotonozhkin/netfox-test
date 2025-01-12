@@ -66,13 +66,11 @@ struct InterScreen : View {
         
         if secureScreenNumber == 2 {
             var localCount = 0
-            var fl = false
             for str in strStandart {
-                if !fl {
+                if localCount < 3 {
                     flCount += 1
                     if str.color == "red", localCount < 3 {
                         localCount += 1
-                        fl = true
                     }
                 }
             }
@@ -103,7 +101,7 @@ struct InterScreen : View {
                 }
             case 2:
                 print("screen 2")
-                if index <= flCount {
+                if index <= (flCount + 2) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
                         withAnimation {
                             displayedStrings[Date()] = strStandart[index]
