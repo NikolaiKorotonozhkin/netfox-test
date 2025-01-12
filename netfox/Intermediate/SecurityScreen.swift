@@ -97,8 +97,10 @@ struct InterScreen : View {
                         progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
                         if secureScreenNumber == 2, strStandart[index].color == "red" {
                             redStringCount += 1
+                            print("redStringCount \(redStringCount)")
                             if redStringCount == 3 {
                                 showAlert = true
+                                print("showAlert true")
                             }
                         }
                     }
