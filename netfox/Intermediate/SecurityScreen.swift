@@ -134,40 +134,6 @@ struct InterScreen : View {
                     }
                 }
             }
-            
-//            switch string {
-//            case .standard(let standard):
-//                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-//                    
-//                    guard !showAlert else { return }
-//                    
-//                    withAnimation {
-//                        displayedStrings[Date()] = standard
-//                        progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
-//                        if secureScreenNumber == 1, standard.color == "red" {
-//                            redStringCount += 1
-//                            if redStringCount == 3 {
-//                                showAlert = true
-//                            }
-//                        }
-//                    }
-//                }
-//            case .antivirus(let antivirus):
-//                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-//                    guard !showAlert else { return }
-//                    displayedAntivirusStrings.insert(antivirus, at: 0)
-//                    withAnimation {
-//                        progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
-//                        
-//                        if index == totalStrings - 1 {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                                isFinalDisplay = true
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-            
         }
     }
 }
@@ -240,24 +206,6 @@ private extension InterScreen {
                     maxValue: scanObject.strigs.count
                 ) { currentProgress in
                     print("\(currentProgress)")
-//                    switch secureScreenNumber {
-//                    case 0:
-//                        if currentProgress == 95 {
-//                            showAlert = true
-//                        }
-//                    case 1:
-//                        if currentProgress == 10 {
-//                            showAlert = false
-//                        }
-//                    case 2:
-//                        if currentProgress == 100 {
-//                            showAlert = true
-//                        }
-//                    default:
-//                        if currentProgress == 100 {
-//                            showAlert = true
-//                        }
-//                    }
                     switch secureScreenNumber {
                     case 1:
                         if currentProgress >= 95 {
@@ -265,7 +213,6 @@ private extension InterScreen {
                         }
                     case 2:
                         if currentProgress >= 10 {
-//                            showAlert = false
                         }
                     case 3:
                         if currentProgress >= 100 {
