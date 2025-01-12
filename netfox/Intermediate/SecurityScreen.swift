@@ -103,15 +103,16 @@ struct InterScreen : View {
                 }
             case 2:
                 print("screen 2")
-                if index < flCount {
+                if index <= flCount {
                     DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
                         withAnimation {
                             displayedStrings[Date()] = strStandart[index]
                             progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
+                            if index == flCount {
+                                showAlert = true
+                            }
                         }
                     }
-                } else if index == flCount {
-                    showAlert = true
                 }
             default:
                 print("screen 1/3")
