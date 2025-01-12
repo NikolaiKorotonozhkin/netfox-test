@@ -106,7 +106,7 @@ struct InterScreen : View {
                         withAnimation {
                             displayedStrings[Date()] = strStandart[index]
                             progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
-                            if index == flCount {
+                            if index == (flCount + 2) {
                                 showAlert = true
                             }
                         }
