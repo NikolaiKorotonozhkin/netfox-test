@@ -203,7 +203,9 @@ private extension InterScreen {
             .padding(.vertical, isLandscape ? 10 : 24)
             
             if showAlert {
-                Color(red: 179/255, green: 179/255, blue: 179/255, opacity: 0.82)
+//                Color(red: 179/255, green: 179/255, blue: 179/255, opacity: 0.82)
+//                    .edgesIgnoringSafeArea(.all)
+                Color.black.opacity(0.3)
                     .edgesIgnoringSafeArea(.all)
                 switch secureScreenNumber {
                 case 0:
