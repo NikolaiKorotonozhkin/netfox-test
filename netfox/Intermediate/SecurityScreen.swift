@@ -85,12 +85,23 @@ struct InterScreen : View {
 //            }
             
             switch secureScreenNumber {
-            case 1:
-                print("screen 1")
-            case 2:
-                print("screen 2")
-            case 3:
-                print("screen 3")
+            case 4:
+                print("screen 4")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+                    guard !showAlert else { return }
+                    displayedAntivirusStrings.insert(strTest[index], at: 0)
+                    withAnimation {
+                        progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
+                        if index == totalStrings - 1 {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                isFinalDisplay = true
+                            }
+                        }
+                    }
+                }
+            default:
+                print("screen 1-3")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
                     guard !showAlert else { return }
@@ -102,22 +113,6 @@ struct InterScreen : View {
                             redStringCount += 1
                             if redStringCount == 3 {
                                 showAlert = true
-                            }
-                        }
-                    }
-                }
-            default:
-                print("screen 4")
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-                    guard !showAlert else { return }
-                    displayedAntivirusStrings.insert(strTest[index], at: 0)
-                    withAnimation {
-                        progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
-                        
-                        if index == totalStrings - 1 {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                isFinalDisplay = true
                             }
                         }
                     }
