@@ -70,20 +70,6 @@ struct InterScreen : View {
             let randomDelay = TimeInterval(Double.random(in: 1.0...1.5))
             cumulativeDelay += randomDelay
             
-//            DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-//                guard !showAlert else { return }
-//                displayedAntivirusStrings.insert(AntivirusString(name: "test", icn: "t"), at: 0)
-//                withAnimation {
-//                    progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
-//                    
-//                    if index == totalStrings - 1 {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                            isFinalDisplay = true
-//                        }
-//                    }
-//                }
-//            }
-            
             switch secureScreenNumber {
             case 4:
                 print("screen 4")
@@ -109,7 +95,7 @@ struct InterScreen : View {
                     withAnimation {
                         displayedStrings[Date()] = strStandart[index]
                         progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
-                        if secureScreenNumber == 1, strStandart[index].color == "red" {
+                        if secureScreenNumber == 2, strStandart[index].color == "red" {
                             redStringCount += 1
                             if redStringCount == 3 {
                                 showAlert = true
