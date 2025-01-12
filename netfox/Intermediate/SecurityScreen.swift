@@ -239,16 +239,34 @@ private extension InterScreen {
                     maxValue: scanObject.strigs.count
                 ) { currentProgress in
                     print("\(currentProgress)")
+//                    switch secureScreenNumber {
+//                    case 0:
+//                        if currentProgress == 95 {
+//                            showAlert = true
+//                        }
+//                    case 1:
+//                        if currentProgress == 10 {
+//                            showAlert = false
+//                        }
+//                    case 2:
+//                        if currentProgress == 100 {
+//                            showAlert = true
+//                        }
+//                    default:
+//                        if currentProgress == 100 {
+//                            showAlert = true
+//                        }
+//                    }
                     switch secureScreenNumber {
-                    case 0:
+                    case 1:
                         if currentProgress == 95 {
                             showAlert = true
                         }
-                    case 1:
+                    case 2:
                         if currentProgress == 10 {
                             showAlert = false
                         }
-                    case 2:
+                    case 3:
                         if currentProgress == 100 {
                             showAlert = true
                         }
@@ -431,7 +449,7 @@ private extension InterScreen {
                 Text(scanObject.subMessTxt ?? "")
                 .font(.system(size: isIpad ? 16: 13))
                 .foregroundColor(Color(red: 110/255, green: 112/255, blue: 101/255))
-                .lineLimit(2)
+                .lineLimit(4)
                 .multilineTextAlignment(.center)
             }
             .padding(.horizontal, 8)
@@ -445,7 +463,7 @@ private extension InterScreen {
             
             Text(scanObject.messSbtlt)
             .font(.system(size: isIpad ? 16 : 13))
-            .lineLimit(2)
+            .lineLimit(4)
             .foregroundColor(.black)
             .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity)
@@ -507,7 +525,7 @@ private extension InterScreen {
                 Text("\(scanObject.subMessTxtOne ?? "") \(scanObject.subMessTxtTwo ?? "") \(scanObject.subMessTxtThree ?? "")")
                     .font(.system(size: isIpad ? 16: 13))
                     .foregroundColor(Color(red: 110/255, green: 112/255, blue: 101/255))
-                    .lineLimit(2)
+                    .lineLimit(4)
                     .multilineTextAlignment(.center)
             }
             .padding(.horizontal, 8)
@@ -521,7 +539,7 @@ private extension InterScreen {
             
             Text(scanObject.messSbtlt)
                 .font(.system(size: isIpad ? 16 : 13))
-                .lineLimit(2)
+                .lineLimit(4)
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
@@ -576,7 +594,7 @@ private extension InterScreen {
             
             Text(scanObject.messSbtlt)
                 .font(.system(size: isIpad ? 16 : 13))
-                .lineLimit(2)
+                .lineLimit(4)
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
