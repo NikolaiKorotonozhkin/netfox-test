@@ -103,7 +103,7 @@ struct InterScreen : View {
                 }
             case 2:
                 print("screen 2")
-                if index <= flCount {
+                if index < flCount {
                     DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
                         withAnimation {
                             displayedStrings[Date()] = strStandart[index]
@@ -217,16 +217,6 @@ private extension InterScreen {
             if showAlert {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
-//                switch secureScreenNumber {
-//                case 0:
-//                    alert0(isIpad: isIpad)
-//                case 1:
-//                    alert1(isIpad: isIpad)
-//                case 2:
-//                    alert2(isIpad: isIpad)
-//                default:
-//                    alert3(isIpad: isIpad)
-//                }
                 switch secureScreenNumber {
                 case 1:
                     alert0(isIpad: isIpad)
@@ -276,7 +266,7 @@ private extension InterScreen {
                         }
                     case 2:
                         if currentProgress >= 10 {
-                            showAlert = false
+//                            showAlert = false
                         }
                     case 3:
                         if currentProgress >= 100 {
