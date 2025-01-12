@@ -42,43 +42,124 @@ struct InterScreen : View {
         return formatter.string(from: date)
     }
     
-//    private func displayStringsWithDelay() {
-//        displayedStrings = [:]
-//        displayedAntivirusStrings = []
-//        progress = 0
-//        redStringCount = 0
-//        isFinalDisplay = false
-//        
-//        let totalStrings = scanObject.strigs.count
-//        var cumulativeDelay: TimeInterval = 0
-//        
-//        let strTest: [AntivirusString] = scanObject.strigs.map({
-//            AntivirusString(name: $0.name,
-//                            icn: $0.icn ?? "",
-//                            threatCount: 3)
-//        })
-//        
-//        let strStandart: [StandardString] = scanObject.strigs.map({
-//            StandardString(name: $0.name,
-//                           color: $0.color ?? "")
-//        })
-//        
-//        for (index, string) in scanObject.strigs.enumerated() {
-//            
-//            guard !showAlert else { break }
-//            
-//            let randomDelay = TimeInterval(Double.random(in: 1.0...1.5))
-//            cumulativeDelay += randomDelay
-//            
-//            switch secureScreenNumber {
-//            case 4:
-//                print("screen 4")
-//                
+    private func displayStringsWithDelay() {
+        displayedStrings = [:]
+        displayedAntivirusStrings = []
+        progress = 0
+        redStringCount = 0
+        isFinalDisplay = false
+        var flCount = 0
+        
+        let totalStrings = scanObject.strigs.count
+        var cumulativeDelay: TimeInterval = 0
+        
+        let strTest: [AntivirusString] = scanObject.strigs.map({
+            AntivirusString(name: $0.name,
+                            icn: $0.icn ?? "",
+                            threatCount: 3)
+        })
+        
+        let strStandart: [StandardString] = scanObject.strigs.map({
+            StandardString(name: $0.name,
+                           color: $0.color ?? "")
+        })
+        
+        if secureScreenNumber == 2 {
+            var localCount = 0
+            var fl = false
+            for str in strStandart {
+                if !fl {
+                    flCount += 1
+                    if str.color == "red", localCount < 3 {
+                        localCount += 1
+                        fl = true
+                    }
+                }
+            }
+        }
+        
+        for (index, string) in scanObject.strigs.enumerated() {
+            
+            guard !showAlert else { break }
+            
+            let randomDelay = TimeInterval(Double.random(in: 1.0...1.5))
+            cumulativeDelay += randomDelay
+            
+            switch secureScreenNumber {
+            case 4:
+                print("screen 4")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+                    guard !showAlert else { return }
+                    displayedAntivirusStrings.insert(strTest[index], at: 0)
+                    withAnimation {
+                        progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
+                        if index == totalStrings - 1 {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                isFinalDisplay = true
+                            }
+                        }
+                    }
+                }
+            case 2:
+                print("screen 2")
+                if index <= flCount {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+                        withAnimation {
+                            displayedStrings[Date()] = strStandart[index]
+                            progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
+                        }
+                    }
+                } else if index == flCount {
+                    showAlert = true
+                }
+            default:
+                print("screen 1/3")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+                    guard !showAlert else { return }
+                    print("showAlert first = \(showAlert)")
+                    
+                    withAnimation {
+                        displayedStrings[Date()] = strStandart[index]
+                        progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
+                        if secureScreenNumber == 2, strStandart[index].color == "red" {
+                            redStringCount += 1
+                            print("redStringCount \(redStringCount)")
+                            if redStringCount == 3 {
+                                showAlert = true
+                                print("showAlert true")
+                                print("showAlert = \(showAlert)")
+                            }
+                        }
+                    }
+                }
+            }
+            
+//            switch string {
+//            case .standard(let standard):
+//                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+//                    
+//                    guard !showAlert else { return }
+//                    
+//                    withAnimation {
+//                        displayedStrings[Date()] = standard
+//                        progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
+//                        if secureScreenNumber == 1, standard.color == "red" {
+//                            redStringCount += 1
+//                            if redStringCount == 3 {
+//                                showAlert = true
+//                            }
+//                        }
+//                    }
+//                }
+//            case .antivirus(let antivirus):
 //                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
 //                    guard !showAlert else { return }
-//                    displayedAntivirusStrings.insert(strTest[index], at: 0)
+//                    displayedAntivirusStrings.insert(antivirus, at: 0)
 //                    withAnimation {
 //                        progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
+//                        
 //                        if index == totalStrings - 1 {
 //                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 //                                isFinalDisplay = true
@@ -86,122 +167,10 @@ struct InterScreen : View {
 //                        }
 //                    }
 //                }
-//            default:
-//                print("screen 1-3")
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-//                    guard !showAlert else { return }
-//                    print("showAlert first = \(showAlert)")
-//                    
-//                    withAnimation {
-//                        displayedStrings[Date()] = strStandart[index]
-//                        progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
-//                        if secureScreenNumber == 2, strStandart[index].color == "red" {
-//                            redStringCount += 1
-//                            print("redStringCount \(redStringCount)")
-//                            if redStringCount == 3 {
-//                                showAlert = true
-//                                print("showAlert true")
-//                                print("showAlert = \(showAlert)")
-//                            }
-//                        }
-//                    }
-//                }
 //            }
-//            
-////            switch string {
-////            case .standard(let standard):
-////                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-////                    
-////                    guard !showAlert else { return }
-////                    
-////                    withAnimation {
-////                        displayedStrings[Date()] = standard
-////                        progress = (CGFloat(displayedStrings.count) / CGFloat(totalStrings)) * 100
-////                        if secureScreenNumber == 1, standard.color == "red" {
-////                            redStringCount += 1
-////                            if redStringCount == 3 {
-////                                showAlert = true
-////                            }
-////                        }
-////                    }
-////                }
-////            case .antivirus(let antivirus):
-////                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-////                    guard !showAlert else { return }
-////                    displayedAntivirusStrings.insert(antivirus, at: 0)
-////                    withAnimation {
-////                        progress = (CGFloat(displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
-////                        
-////                        if index == totalStrings - 1 {
-////                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-////                                isFinalDisplay = true
-////                            }
-////                        }
-////                    }
-////                }
-////            }
-//            
-//        }
-//    }
-    
-    private func displayStringsWithDelay() {
-        displayedStrings = [:]
-        displayedAntivirusStrings = []
-        progress = 0
-        redStringCount = 0
-        isFinalDisplay = false
-        
-        let totalStrings = scanObject.strigs.count
-        var cumulativeDelay: TimeInterval = 0
-        
-        let strTest: [AntivirusString] = scanObject.strigs.map {
-            AntivirusString(name: $0.name, icn: $0.icn ?? "", threatCount: 3)
-        }
-        let strStandart: [StandardString] = scanObject.strigs.map {
-            StandardString(name: $0.name, color: $0.color ?? "")
-        }
-        
-        for (index, string) in scanObject.strigs.enumerated() {
-            guard !showAlert else { break }
             
-            let randomDelay = TimeInterval(Double.random(in: 1.0...1.5))
-            cumulativeDelay += randomDelay
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-                guard !self.showAlert else { return }
-                
-                switch self.secureScreenNumber {
-                case 4:
-                    self.displayedAntivirusStrings.insert(strTest[index], at: 0)
-                    withAnimation {
-                        self.progress = (CGFloat(self.displayedAntivirusStrings.count) / CGFloat(totalStrings)) * 100
-                    }
-                    
-                    if index == totalStrings - 1 {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.isFinalDisplay = true
-                        }
-                    }
-                    
-                default:
-                    self.displayedStrings[Date()] = strStandart[index]
-                    withAnimation {
-                        self.progress = (CGFloat(self.displayedStrings.count) / CGFloat(totalStrings)) * 100
-                    }
-                    
-                    if self.secureScreenNumber == 2, strStandart[index].color == "red" {
-                        self.redStringCount += 1
-                        if self.redStringCount == 3 {
-                            self.showAlert = true
-                            return
-                        }
-                    }
-                }
-            }
         }
     }
-
 }
 
 private extension InterScreen {
