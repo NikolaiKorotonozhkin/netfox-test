@@ -91,6 +91,7 @@ struct InterScreen : View {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
                     guard !showAlert else { return }
+                    print("showAlert first = \(showAlert)")
                     
                     withAnimation {
                         displayedStrings[Date()] = strStandart[index]
@@ -101,6 +102,7 @@ struct InterScreen : View {
                             if redStringCount == 3 {
                                 showAlert = true
                                 print("showAlert true")
+                                print("showAlert = \(showAlert)")
                             }
                         }
                     }
